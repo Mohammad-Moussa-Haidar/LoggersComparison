@@ -21,6 +21,8 @@ namespace LoggersComparison
         }
         public void RunSeriFileLogger()
         {
+            _log.LogInformation("Seri Log - Logging Started");
+
 
             var stopWatch = Stopwatch.StartNew();
             for (int i = 0; i < _config.GetValue<int>("LoopTimes"); i++)
@@ -38,6 +40,8 @@ namespace LoggersComparison
         {
             var stopWatch = Stopwatch.StartNew();
             var awitableTasks =new List<Task>();
+            awitableTasks.Add(_fileLogger.LogAsync("0000-0000-0000-0000", "Customer Logger - Logging Started", LoggingLevel.INF));
+
             for (int i = 0; i < _config.GetValue<int>("LoopTimes"); i++)
             {
                 awitableTasks.Add(_fileLogger.LogAsync($"{i}", $"Run number {i}", LoggingLevel.INF));

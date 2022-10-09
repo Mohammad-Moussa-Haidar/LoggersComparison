@@ -38,7 +38,7 @@ namespace LoggersComparison
                         }
                         else
                         {
-                            StreamWriter streamWriter = new StreamWriter(path)
+                            StreamWriter streamWriter = new StreamWriter(path, true, Encoding.UTF8, 65536)
                             {
                             };
                             textWriters.Add(path, streamWriter);
@@ -53,7 +53,4 @@ namespace LoggersComparison
             }
         }
     }
-
-
-
 }

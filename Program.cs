@@ -18,12 +18,7 @@ namespace LoggersComparison
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Build())
                 .WriteTo.Async(a => a.File("logs/myapp.log"), bufferSize: 500)
-                .CreateLogger();
-          //  Serilog.ILogger logger = Log.Logger;
-
-            Log.Logger.Information("Application Starting");
-
-          
+                .CreateLogger();          
             
             var host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
             {
