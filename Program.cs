@@ -17,7 +17,7 @@ namespace LoggersComparison
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Build())
-                .WriteTo.Async(a => a.File("logs/myapp.log"), bufferSize: 500)
+                .WriteTo.Async(a => a.File("logs/myapp.log"), bufferSize: 64000)
                 .CreateLogger();          
             
             var host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
@@ -32,10 +32,10 @@ namespace LoggersComparison
             .Build();
 
             var svc = ActivatorUtilities.CreateInstance<GreetingService>(host.Services);
-            svc.RunSeriFileLogger();
             await svc.RunCustomFileLogger();
 
-
+            svc.RunSeriFileLogger();
+            Log.CloseAndFlush();
         }
 
 

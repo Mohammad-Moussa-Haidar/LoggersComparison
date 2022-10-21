@@ -29,6 +29,7 @@ namespace LoggersComparison
             {
                 _log.LogInformation("Run number {runNumber}", i);
             }
+            
             stopWatch.Stop();
 
             Console.WriteLine($"SeriLog Logger {_config.GetValue<int>("LoopTimes")} in {stopWatch.Elapsed}");
@@ -49,7 +50,7 @@ namespace LoggersComparison
             await Task.WhenAll(awitableTasks);
             await _fileLogger.Flush();
             stopWatch.Stop();
-            Console.WriteLine($"Customer Logger {_config.GetValue<int>("LoopTimes")} in {stopWatch.Elapsed}");
+            Console.WriteLine($"Custom Logger {_config.GetValue<int>("LoopTimes")} in {stopWatch.Elapsed}");
 
         }
 
