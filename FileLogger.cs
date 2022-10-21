@@ -35,7 +35,7 @@ namespace LoggersComparison
 
         private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 
-        public string Location { get; set; } = "logs/MyFileLoggerApp.Log";
+        public string Location { get; set; } = "logs/customLogger.Log";
         public void Log(string EventId, string DiagnosticMessage, LoggingLevel Level)
         {
             throw new NotImplementedException();
