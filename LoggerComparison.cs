@@ -34,7 +34,6 @@ namespace LoggersComparison
             stopWatch.Stop();
 
             Console.WriteLine($"SeriLog Logger {_config.GetValue<int>("LoopTimes")} in {stopWatch.Elapsed}");
-
         }
 
 
@@ -67,9 +66,9 @@ namespace LoggersComparison
            await Compare();
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync(CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _fileLogger.LogAsync("", "Exiting", LoggingLevel.INF);
         }
     }
 }
