@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace LoggersComparison
 {
-    public interface ILoggerComparison
+    public interface ILoggerComparison : IHostedService
     {
         public Task Compare();
     }

@@ -46,8 +46,8 @@ namespace LoggersComparison
             try
             {
                 await semaphoreSlim.WaitAsync();
-                string currentDateTime = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss +3:00");
-                string entry = currentDateTime + " " + Level + " " + DiagnosticMessage;
+                string currentDateTime = DateTime.Now.ToLongDateString()+ " +3:00";
+                string entry = currentDateTime + " [" + Level + "] " + DiagnosticMessage;
                 await SynchronizedTextWriter.WriteLineAsync(entry);
                 semaphoreSlim.Release();
             }

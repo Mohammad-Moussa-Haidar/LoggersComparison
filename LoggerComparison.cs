@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace LoggersComparison
 {
@@ -56,9 +57,19 @@ namespace LoggersComparison
 
         public async Task Compare()
         {
-            await RunCustomFileLogger();
-            RunSeriFileLogger();
+            RunSeriFileLogger();            
+            await RunCustomFileLogger().ContinueWith((task)=> Console.WriteLine("Done"));
+
         }
 
+        public async Task StartAsync(CancellationToken cancellationToken)
+        {
+           await Compare();
+        }
+
+        public Task StopAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

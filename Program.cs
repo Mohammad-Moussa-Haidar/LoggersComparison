@@ -17,22 +17,23 @@ namespace LoggersComparison
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Build())
-                .WriteTo.Async(a => a.File("logs/seriLogger.log"), bufferSize: 128000)
+                .WriteTo.Async(a => a.File("logs/seriLogger.log", buffered: true), bufferSize: 128000)
                 .CreateLogger();          
             
             var host = Host.CreateDefaultBuilder().ConfigureServices((context, services) =>
             {
+              
                 services.AddSingleton(Log.Logger);
 
                 services.AddTransient<ILoggerComparison, LoggerComarison>();
                 services.AddSingleton<IFileLogger, FileLogger>();
+                services.AddHostedService<LoggerComarison>();
 
             })
             .UseSerilog()
             .Build();
 
-            var svc = ActivatorUtilities.CreateInstance<LoggerComarison>(host.Services);
-            await svc.Compare();
+            await host.RunAsync();
             Log.CloseAndFlush();
         }
 
